@@ -33,9 +33,9 @@ def start():
         elif user_in == 1:
             rps.start()
         elif user_in == 2:
-            pass
+            dice.start()
         elif user_in == 3:
-            pass
+            hangman.start()
 
 
 if __name__ == '__main__':

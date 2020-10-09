@@ -2,7 +2,7 @@
 #
 # Johnny Mai
 # 2020-09-18
-# Personalized Chatbot v1
+# Personalized chatbot v1
 #
 ########################
 import random
@@ -36,11 +36,9 @@ print("Do you like reading books?")
 bookReply = input(">>> ").lower()
 
 if bookReply == "yes" or bookReply == "yea" or bookReply == "y" or bookReply == "ye":
-    print(
-        f"{random.choice(positiveReply)} You should try reading {random.choice(bookList)}. It's one of my favourites!")
+    print(f"{random.choice(positiveReply)} You should try reading {random.choice(bookList)}. It's one of my favourites!")
 elif bookReply == "no" or bookReply == "nah" or bookReply == "nope" or bookReply == "n":
-    print(
-        f"{random.choice(negativeReply)} I would reccommend reading {random.choice(bookList)}, it's a great book even if you don't like to read.")
+    print(f"{random.choice(negativeReply)} I would reccommend reading {random.choice(bookList)}, it's a great book even if you don't like to read.")
 else:
     print("Im not sure I understand what you mean.")
 

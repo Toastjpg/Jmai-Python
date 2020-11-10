@@ -19,4 +19,3 @@ for line in file:
         for i in range(len(ratings)):
             if (-10 <= float(ratings[i]) <= 10) and (float(ratings[i] != 99)):
                 print(ratings[i])
-

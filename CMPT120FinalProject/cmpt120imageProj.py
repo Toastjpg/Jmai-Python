@@ -1,29 +1,32 @@
 # Pygame image functions for the Yet Another Image Processor project
-# Do not modfiy this file
+# Do not modify this file
 
 import pygame
 import numpy
 
+
 def getImage(filename):
-  """
+    """
   Input: filename - string containing image filename to open
   Returns: 2d array of RGB values
   """
-  image = pygame.image.load(filename)
-  return pygame.surfarray.array3d(image).tolist()
+    image = pygame.image.load(filename)
+    return pygame.surfarray.array3d(image).tolist()
+
 
 def saveImage(pixels, filename):
-  """
+    """
   Input:  pixels - 2d array of RGB values
           filename - string containing filename to save image
   Output: Saves a file containing pixels
   """
-  nparray = numpy.asarray(pixels)
-  surf = pygame.surfarray.make_surface(nparray)
-  (width, height, colours) = nparray.shape
-  surf = pygame.display.set_mode((width, height))
-  pygame.surfarray.blit_array(surf, nparray)
-  pygame.image.save(surf, filename)
+    nparray = numpy.asarray(pixels)
+    surf = pygame.surfarray.make_surface(nparray)
+    (width, height, colours) = nparray.shape
+    surf = pygame.display.set_mode((width, height))
+    pygame.surfarray.blit_array(surf, nparray)
+    pygame.image.save(surf, filename)
+
 
 def showInterface(pixels, title, textList):
     """
@@ -49,7 +52,7 @@ def showInterface(pixels, title, textList):
     width = max(width, maxLineWidth)
     # set up the display
     pygame.display.set_caption(title + " (" + str(width) + "x" + str(height) + ")")
-    screen = pygame.display.set_mode((width, height + textObjs[0].get_height()*len(textObjs)))
+    screen = pygame.display.set_mode((width, height + textObjs[0].get_height() * len(textObjs)))
     screen.fill((225, 225, 225))
     # add the image to the display
     screen.blit(surf, (0, 0))
@@ -60,6 +63,7 @@ def showInterface(pixels, title, textList):
         textHeight += textObj.get_height()
     # display everything
     pygame.display.update()
+
 
 def createBlackImage(width, height):
     """

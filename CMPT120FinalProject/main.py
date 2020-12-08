@@ -103,9 +103,13 @@ def handleUserInput(state, img):
             state["lastUserInput"] = "O"
             tkinter.Tk().withdraw()
             openFilename = tkinter.filedialog.askopenfilename()
-            state["lastOpenFilename"] = openFilename
-            img = cmpt120imageProj.getImage(openFilename)
-            # call the cmpt120imageProj.getImage with openFilename to get the pixels
+            # Check if a file is actually selected by the user
+            if openFilename:
+                state["lastOpenFilename"] = openFilename
+                img = cmpt120imageProj.getImage(openFilename)
+                # call the cmpt120imageProj.getImage with openFilename to get the pixels
+            else:
+                pass
         elif userInput == "S":
             print("Log: Saving Image...")
             state["lastUserInput"] = "S"
@@ -231,6 +235,7 @@ while keepRunning:
             # otherwise let the helper function handle the input
             else:
                 currentImg = handleUserInput(appStateValues, currentImg)
+                # Update interface to show currentImg and menu after each user input
                 cmpt120imageProj.showInterface(currentImg, appStateValues["lastOpenFilename"], generateMenu(appStateValues))
         elif event.type == pygame.QUIT:  # another way to quit the program is to click the close button
             keepRunning = False

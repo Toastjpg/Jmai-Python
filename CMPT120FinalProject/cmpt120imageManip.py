@@ -11,9 +11,9 @@ import numpy
 # Basic functions
 def invert(array):
     """
-    Inverts the color of an image
+    Inverts the color of an image by modifying the RGB values
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array with modified RGB values
+    Returns: 2D array of RGB values
     """
     for column in array:
         for pixel in column:
@@ -25,9 +25,9 @@ def invert(array):
 
 def flipHorizontal(array):
     """
-    Flips an image along it's horizontal axis
+    Flips an image along it's horizontal axis by reversing the order of columns
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array with modified RGB values
+    Returns: 2D array of RGB values
     """
     flippedArray = []
 
@@ -38,13 +38,12 @@ def flipHorizontal(array):
 
 def flipVertical(array):
     """
-    Flips an image along it's vertical axis
+    Flips an image along it's vertical axis by reversing the order of pixels in each column
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array with modified RGB values
+    Returns: 2D array of RGB values
     """
     for i in range(len(array)):
-        tempArray = array[i]
-        array[i] = tempArray[::-1]
+        array[i] = array[i][::-1]
     return array
 
 
@@ -53,7 +52,7 @@ def removeRed(array):
     """
     Sets R values of all pixels in the image to 0
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array with modified RGB values
+    Returns: 2D array of RGB values
     """
     for column in array:
         for pixel in column:
@@ -65,7 +64,7 @@ def removeGreen(array):
     """
     Sets G values of all pixels in the image to 0
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array with modified RGB values
+    Returns: 2D array of RGB values
     """
     for column in array:
         for pixel in column:
@@ -77,7 +76,7 @@ def removeBlue(array):
     """
     Sets B values of all pixels in the image to 0
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array with modified RGB values
+    Returns: 2D array of RGB values
     """
     for column in array:
         for pixel in column:
@@ -89,7 +88,7 @@ def greyscale(array):
     """
     Sets all RGB values pixels to a shade of grey
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array of modified RGB values
+    Returns: 2D array of RGB values
     """
     for column in array:
         for pixel in column:
@@ -108,7 +107,7 @@ def applySepia(array):
     SepiaBlue = (Red * .272) + (Green *.534) + (Blue * .131)
 
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array with modified RGB values
+    Returns: 2D array of RGB values
     """
     for column in array:
         for pixel in column:
@@ -129,10 +128,9 @@ def applySepia(array):
 
 def decBrightness(array):
     """
-    Decreases the brightness of each pixel. Reduces R/G/B value by 10 each time.
-
+    Decreases the brightness of each pixel. Removes 10 from each of the R/G/B values.
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array with modified RGB values
+    Returns: 2D array of RGB values
     """
     for column in array:
         for pixel in column:
@@ -153,10 +151,9 @@ def decBrightness(array):
 
 def incBrightness(array):
     """
-    Decreases the brightness of each pixel. Reduces R/G/B value by 10 each time.
-
+    Increases the brightness of each pixel. Adds 10 to each of the R/G/B values.
     Input: array - takes in 2D array of RGB values
-    Returns: Returns a 2D array with modified RGB values
+    Returns: 2D array of RGB values
     """
     for column in array:
         for pixel in column:
@@ -177,16 +174,127 @@ def incBrightness(array):
 
 # Advanced Functions
 def rotateLeft(array):
-    pass
+    """
+    Rotates the image 90 degrees to the left.
+    Input: array - takes in 2D array of RGB values
+    Returns: 2D array of RGB values
+    """
+    # Create a black image with a width equal to the height of array and a height equal to the width of array
+    tempArray = cmpt120imageProj.createBlackImage(len(array[0]), len(array))
+
+    # Iterate over the dimensions of tempArray and grab RGB values from original array
+    for i in range(len(tempArray)):
+        for j in range(len(tempArray[i])):
+            tempArray[i][-j] = array[j][i]
+    return tempArray
 
 
 def rotateRight(array):
-    pass
+    """
+    Rotates the image 90 degrees to the left.
+    Input: array - takes in 2D array of RGB values
+    Returns: 2D array of RGB values
+    """
+    # Create a black image with a width equal to the height of array and a height equal to the width of array
+    tempArray = cmpt120imageProj.createBlackImage(len(array[0]), len(array))
+
+    # Iterate over the dimensions of tempArray and grab RGB values from original array
+    for i in range(len(tempArray)):
+        for j in range(len(tempArray[i])):
+            tempArray[-i][j] = array[j][i]
+    return tempArray
 
 
 def pixelate(array):
-    pass
+    """
+    Reduces the quality of an image by averaging the R/G/B values of pixels in 4x4 blocks.
+    Input: array - takes in 2D array of RGB values
+    Returns: 2D array of RGB values
+    """
+    # Iterate over image in blocks of 4x4 pixel
+    for x in range(0, len(array), 4):
+        for y in range(0, len(array[x]), 4):
+            red = 0
+            green = 0
+            blue = 0
+            # Accumulate RGB values for all pixels within a 4x4 block
+            for column in array[x:x+4]:
+                for pixel in column[y:y+4]:
+                    red += pixel[0]
+                    green += pixel[1]
+                    blue += pixel[2]
+            # Set pixels in the 4x4 block to the averaged RGB value
+            for column in array[x:x+4]:
+                for pixel in column[y:y+4]:
+                    pixel[0] = red/16
+                    pixel[1] = green/16
+                    pixel[2] = blue/16
+    return array
 
 
 def binarize(array):
-    pass
+    """
+    Creates a black and white image based on calculated threshold values
+    Input: array - takes in 2D array of RGB values
+    Output: 2D array of RBG values
+    """
+    count = 0
+    bgCount = 0
+    fgCount = 0
+
+    # Convert tempArray to greyscale
+    for column in array:
+        for pixel in column:
+            average = (pixel[0] + pixel[1] + pixel[2]) / 3
+            pixel[0] = average
+            pixel[1] = average
+            pixel[2] = average
+            count += pixel[0]
+
+    # Calculate the average threshold
+    threshold = count/(len(array) * len(array[0]))
+
+    # Separates pixels from array into background or foreground based on threshold
+    for i in range(len(array)):
+        for j in range(len(array[i])):
+            if array[i][j][0] <= threshold or array[i][j][1] <= threshold or array[i][j][2] <= threshold:
+                bgCount += array[i][j][0]
+            else:
+                fgCount += array[i][j][0]
+
+    average = ((bgCount/(len(array) * len(array[0]))) + (fgCount/(len(array) * len(array[0]))))/2
+
+    # Check if the difference between threshold and average is greater than 10
+    if abs(threshold - average) > 10:
+        cont = True
+        # Loop through and calculate a new average
+        while cont:
+            threshold = average
+            bgCount = 0
+            fgCount = 0
+            for i in range(len(array)):
+                for j in range(len(array[i])):
+                    if array[i][j][0] <= threshold or array[i][j][1] <= threshold or array[i][j][2] <= threshold:
+                        bgCount += array[i][j][0]
+                    else:
+                        fgCount += array[i][j][0]
+
+            average = ((bgCount / (len(array) * len(array[0]))) + (fgCount / (len(array) * len(array[0])))) / 2
+            # Check the difference between new average and old average, otherwise continue
+            if abs(threshold - average) <= 10:
+                threshold = average
+                cont = False
+
+    # Iterate over pixels of greyscaled image and set to 0 or 255 if less than or greater than threshold
+    for i in range(len(array)):
+        for j in range(len(array[i])):
+            if array[i][j][0] <= threshold:
+                array[i][j][0] = 0
+                array[i][j][1] = 0
+                array[i][j][2] = 0
+            else:
+                array[i][j][0] = 255
+                array[i][j][1] = 255
+                array[i][j][2] = 255
+
+    return array

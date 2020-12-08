@@ -115,10 +115,13 @@ def handleUserInput(state, img):
             state["lastUserInput"] = "S"
             tkinter.Tk().withdraw()
             saveFilename = tkinter.filedialog.asksaveasfilename()
-            state["lastSaveFilename"] = saveFilename
-            cmpt120imageProj.saveImage(img, saveFilename)
-            img = cmpt120imageProj.getImage(saveFilename)
-            # call the cmpt120imageProj.saveImage with saveFilename to save the pixels
+            if saveFilename:
+                state["lastSaveFilename"] = saveFilename
+                cmpt120imageProj.saveImage(img, saveFilename)
+                img = cmpt120imageProj.getImage(saveFilename)
+                # call the cmpt120imageProj.saveImage with saveFilename to save the pixels
+            else:
+                pass
         elif userInput == "R":
             print("Log: Reloading Original Image...")
             state["lastUserInput"] = "R"

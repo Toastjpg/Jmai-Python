@@ -1,0 +1,31 @@
+safety score,model name,brand,price
+30,6,Mazda,27550
+29,Legacy,Subaru,26695
+28,Outback,Subaru,30995
+27,Camry,Toyota,27250
+26,Maxima,Nissan,41440
+25,Sonata,Hyundai,27149
+24,Accord,Honda,28705
+23,Altima,Nissan,29498
+22,Optima,Kia,28495
+21,Giulia,Alfa Romeo,52495
+20,Jetta,Volkswagen,21595
+19,C-Class,Mercedes-Benz,46400
+18,Model 3,Tesla,51600
+17,Forester,Subaru,28995
+16,ES350,Lexus,49250
+15,3 Series,BMW,44950
+14,S60,Volvo,45250
+13,CX-3,Mazda,21300
+12,RAV4,Toyota,28250
+11,CR-V,Honda,29805
+10,Kona,Hyundai,21299
+9,A3,Audi,34500
+8,XC40,Volvo,39950
+7,MKZ,Lincoln,53200
+6,TLX,Acura,43990
+5,Passat,Volkswagen,31995
+4,Fusion,Ford,28985
+3,Malibu,Chevrolet,26348
+2,Camaro,Chevrolet,29448
+1,Mustang,Chevrolet,31080
